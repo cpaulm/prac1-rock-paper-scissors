@@ -1,0 +1,27 @@
+# Rock, Paper, Scissors game in command line
+# Upon running the program, text is "Welcome to Rock, Paper, Scissors! \n This game was developed by Paul"
+# Option to play the game or exit
+# If user chooses to play, they will be prompted to enter their choice
+# Human vs Human or Human vs Computer
+
+# If user chooses Human vs Human, Prompt Player1 name then Player2 name
+# If user choose Human vs Computer, Prompt Player1 name only
+
+# Starting the game in Human vs Human mode
+# Player 1 choices:
+# Press A for Rock, S for Paper, D for Scissors
+# After Player 1 makes a choice, show only an * to hide the actual choice
+# Player 2 choices: 1 for Rock, 2 for Paper, 3 for Scissors
+# After Player 2 makes a choice, show only an * to hide the actual choice
+# Display the actual choices made by both players
+# Rock beats Scissors, Scissors beats Paper, Paper beats Rock
+# Display the winner of the game, and track the score
+# Ask if they want to play again, if yes, repeat the game, if no, exit the game
+
+# Starting the game in Human vs Computer
+# Player 1 choices:
+# Press A for Rock, S for Paper, D for Scissors
+# After Player 1 makes a choice, show only an * to hide the actual choice
+# After Computer makes a choice by random, show only an * to hide the actual choice
+# Display the winner of the game, and track the score
+# Ask if they want to play again, if yes, repeat the game, if no, exit the game
