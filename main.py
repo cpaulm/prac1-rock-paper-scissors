@@ -1,28 +1,105 @@
 import msvcrt
+import random
 
-# Rock, Paper, Scissors game in command line
-# Upon running the program, text is "Welcome to Rock, Paper, Scissors! \n This game was developed by Paul"
 
-# def masked_input(prompt=""):
-#     print(prompt, end="", flush=True)
-#     actual_input = ""
-#     while True:
-#         char = msvcrt.getch()  # Get a single character
-#         if char == b'\r':  # Enter key (Carriage Return)
-#             print()  # Move to the next line
-#             break
-#         elif char == b'\x08':  # Backspace key
-#             if actual_input:  # Only if there are characters to delete
-#                 actual_input = actual_input[:-1]
-#                 print("\b \b", end="", flush=True)
-#         else:
-#             actual_input += char.decode('utf-8')  # Decode byte to string
-#             print("*", end="", flush=True)
-#     return actual_input
+def main():
+    
+    print("Welcome to Rock, Paper, Scissors!\nThis game was developed by Paul")
+    
+    while True:
+        option = input("\nStart game (y/n): ")
+        if option == "y":
+            play_game()
+        else:
+            print("Goodbye!")
+            break
+  
+
+def play_game():
+
+    print("""\nGame rules: 
+          Rock beats Scissors
+          Scissors beats Paper
+          Paper beats Rock""")
+    
+    choices_message = """\nInstructions: Press 
+            1 for Rock, 
+            2 for Paper, 
+            3 for Scissors\n"""
+        
+    print("""\nGame modes:
+        1 - Human vs Human
+        2 - Human vs Computer""")
+              
+    while True:
+        mode_chosen = input("\nChoose game mode (1 or 2 or exit): ")
+        if mode_chosen == '1' or mode_chosen == '2':
+            if mode_chosen == '1':
+                print("\nHuman vs Human mode chosen")
+                player1 = input("Enter Player1 name: ")
+                player2 = input("Enter Player2 name: ")
+                
+                print(f"\nPlayer1: {player1} vs Player2: {player2}")
+                print(choices_message)
+                player1_choice = int(choice(player1))
+                player2_choice = int(choice(player2))
+                object_played(player1, player1_choice)
+                object_played(player2, player2_choice)
+                print(winner(player1, player2, player1_choice, player2_choice))
+                break
+            
+            elif mode_chosen == '2':
+                print("Human vs Computer mode chosen")
+                player1 = input("Enter Player1 name: ")
+                player2 = "Computer"
+                
+                print(f"\nPlayer1: {player1} vs Player2: {player2}")
+                print(choices_message)
+                player1_choice = int(choice(player1))
+                player2_choice = int(random_choice())
+                object_played(player1, player1_choice)
+                object_played(player2, player2_choice)
+                print(winner(player1, player2, player1_choice, player2_choice))
+                break
+                
+        elif mode_chosen == "exit":
+            print("Goodbye!")
+            break
+        else:
+            print("""Please enter a valid option.
+                Type exit to quit the game""")
+
+def masked_input(prompt=""):
+    print(prompt, end="", flush=True)
+    actual_input = ""
+    while True:
+        char = msvcrt.getch()  # Get a single character
+        if char == b'\r':  # Enter key (Carriage Return)
+            print()  # Move to the next line
+            break
+        elif char == b'\x08':  # Backspace key
+            if actual_input:  # Only if there are characters to delete
+                actual_input = actual_input[:-1]
+                print("\b \b", end="", flush=True)
+        else:
+            actual_input += char.decode('utf-8')  # Decode byte to string
+            print("*", end="", flush=True)
+    return actual_input
 
 def choice(player):
-    
-    p_choice = int(input(f"{player} enter your choice: "))
+    while True:
+        p_choice = masked_input(f"{player} enter your choice: ")
+        if p_choice in ['1', '2', '3']:
+            return int(p_choice)
+        elif p_choice == "exit":
+            print("Goodbye!")
+            exit()
+            
+        else:
+            print("""Please enter a valid option.
+                Type exit to quit the game""")
+        
+def object_played(player, p_choice):
     if p_choice == 1:
         object_played = f"{player} chose Rock"
     elif p_choice == 2:
@@ -30,11 +107,10 @@ def choice(player):
     elif p_choice == 3:
         object_played = f"{player} chose Scissors"
     else:
-        print("Invalid choice")
+        print("\nInvalid choice")
     print(object_played)
-    return p_choice
-        
-def winner(player1, player2, player1_choice, player2_choice):
+    
+def winner(player1, player2, player1_choice, player2_choice):  
     if player1_choice == 1 and player2_choice == 3:
         result = f"{player1} wins!"
     elif player1_choice == 2 and player2_choice == 1:
@@ -51,63 +127,8 @@ def winner(player1, player2, player1_choice, player2_choice):
         result = "It's a tie!"
     return result
     
-
-def play_game():
-
-    print("""Game rules: 
-          Rock beats Scissors
-          Scissors beats Paper
-          Paper beats Rock""")
-    
-    choices_message = """Instructions: Press 
-            1 for Rock, 
-            2 for Paper, 
-            3 for Scissors"""
-        
-    print("""Game modes:
-        1 - Human vs Human
-        2 - Human vs Computer""")
-              
-    mode_chosen = int(input("Choose game mode (1 or 2): ")) 
-    
-    while True:
-        if mode_chosen == 1 or mode_chosen == 2:
-            if mode_chosen == 1:
-                print("Human vs Human mode chosen")
-                player1 = input("Enter Player1 name: ")
-                player2 = input("Enter Player2 name: ")
-                
-                print(f"Player1: {player1} vs Player2: {player2}")
-                print(choices_message)
-                player1_choice = choice(player1)
-                player2_choice = choice(player2)
-                print(winner(player1, player2, player1_choice, player2_choice))
-                break
-            elif mode_chosen == 2:
-                print("Human vs Computer mode chosen")
-                player1 = input("Enter Player1 name: ")
-                player2 = "Computer"
-        elif mode_chosen == "exit":
-            print("Goodbye!")
-            exit()
-        else:
-            print("""Please enter a valid option.
-                Type exit to quit the game""")
-        
-
-def main():
-    
-    print("""Welcome to Rock, Paper, Scissors! \n
-          This game was developed by Paul""")
-    
-    while True:
-        option = input("Start game (y/n): ")
-        if option == "y":
-            play_game()
-        else:
-            print("Goodbye!")
-            break
-            exit()
+def random_choice():
+    return random.randint(1, 3)
 
 
     
