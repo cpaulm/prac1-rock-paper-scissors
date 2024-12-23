@@ -17,6 +17,7 @@ def main():
             print("Goodbye!")
             exit()
   
+  
 def game_modes():
     print("""\nGame modes:
         1 - Human vs Human
@@ -34,6 +35,7 @@ def game_modes():
             Type exit to quit the game""")
     return mode_chosen
 
+
 def player_names(mode_chosen):
     if mode_chosen == '1':
         player1 = input("Enter Player1 name: ")
@@ -41,7 +43,9 @@ def player_names(mode_chosen):
     elif mode_chosen == '2':
         player1 = input("Enter Player1 name: ")
         player2 = "Computer"
+    print(f"\nPlayer1: {player1} vs Player2: {player2}")
     return player1, player2
+
 
 def play_game(mode_chosen, player1, player2):
 
@@ -57,28 +61,24 @@ def play_game(mode_chosen, player1, player2):
         
     while True:
         
-        if mode_chosen == '1' or mode_chosen == '2':
-            if mode_chosen == '1':
-                print(f"\nPlayer1: {player1} vs Player2: {player2}")
-                print(choices_message)
-                player1_choice = int(choice(player1))
-                player2_choice = int(choice(player2))
-                object_played(player1, player1_choice)
-                object_played(player2, player2_choice)
-                print(winner(player1, player2, player1_choice, player2_choice))
-                break
-            
-            elif mode_chosen == '2':
-                print(f"\nPlayer1: {player1} vs Player2: {player2}")
-                print(choices_message)
-                player1_choice = int(choice(player1))
-                player2_choice = int(random_choice())
-                object_played(player1, player1_choice)
-                object_played(player2, player2_choice)
-                print(winner(player1, player2, player1_choice, player2_choice))
-                break
-                
+        if mode_chosen == '1':
+            print(choices_message)
+            player1_choice = int(choice(player1))
+            player2_choice = int(choice(player2))
+            object_played(player1, player1_choice)
+            object_played(player2, player2_choice)
+            print(winner(player1, player2, player1_choice, player2_choice))
+            break
         
+        elif mode_chosen == '2':
+            print(choices_message)
+            player1_choice = int(choice(player1))
+            player2_choice = int(random_choice())
+            object_played(player1, player1_choice)
+            object_played(player2, player2_choice)
+            print(winner(player1, player2, player1_choice, player2_choice))
+            break
+       
 
 def masked_input(prompt=""):
     print(prompt, end="", flush=True)
@@ -97,6 +97,7 @@ def masked_input(prompt=""):
             print("*", end="", flush=True)
     return actual_input
 
+
 def choice(player):
     while True:
         p_choice = masked_input(f"{player} enter your choice: ")
@@ -104,12 +105,12 @@ def choice(player):
             return int(p_choice)
         elif p_choice == "exit":
             print("Goodbye!")
-            exit()
-            
+            exit()           
         else:
             print("""Please enter a valid option.
                 Type exit to quit the game""")
-        
+
+       
 def object_played(player, p_choice):
     if p_choice == 1:
         object_played = f"{player} chose Rock"
@@ -120,6 +121,7 @@ def object_played(player, p_choice):
     else:
         print("\nInvalid choice")
     print(object_played)
+
     
 def winner(player1, player2, player1_choice, player2_choice):  
     if player1_choice == 1 and player2_choice == 3:
@@ -140,7 +142,6 @@ def winner(player1, player2, player1_choice, player2_choice):
     
 def random_choice():
     return random.randint(1, 3)
-
 
     
 if __name__ == "__main__":
